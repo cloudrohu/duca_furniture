@@ -26,7 +26,7 @@ class Category(models.Model):
             return ""
 
     def __str__(self):
-        return self.title + '--' + self.main_category.title
+        return self.title
 class Sub_Category(models.Model):
     title = models.CharField(max_length=50)
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
