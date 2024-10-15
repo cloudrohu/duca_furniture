@@ -5,7 +5,7 @@ from home.models import *
 # Create your views here.
 def index(request):    
     setting = Setting.objects.all().order_by('-id')[0:1]
-    slider = Slider.objects.all().order_by('-id')[0:1]
+    slider = Slider.objects.all().order_by('-id')[0:6]
     
     
 
