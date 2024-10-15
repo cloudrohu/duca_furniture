@@ -49,7 +49,11 @@ class Setting(models.Model):
     
     logo = models.ImageField(upload_to='logo/')
     testmonial_bg = models.ImageField(upload_to='logo/')
-    header_footer_color = models.CharField(max_length=150,blank=True,)
+    nav_color_1 = models.CharField(max_length=150,blank=True,)
+    nav_color_2 = models.CharField(max_length=150,blank=True,)
+    nav_color_3 = models.CharField(max_length=150,blank=True,)
+    footer_color_1 = models.CharField(max_length=150,blank=True,)
+    footer_color_2 = models.CharField(max_length=150,blank=True,)
     text_color = models.CharField(max_length=150,blank=True,)
     title = models.CharField(max_length=150)
     keywords = models.CharField(max_length=255)

@@ -37,10 +37,10 @@
                             <div class="header-inner-end text-md-end">
                                 <div class="ovic-menu-wrapper">
                                     <ul>
-                                        <li><a href="{% url "about" %}">About Us</a></li>
+                                        <li><a href="{% url "index" %}">About Us</a></li>
                                         <li><a href="{% url "index" %}">Order Tracking</a></li>
-                                        <li><a href="{% url "contact" %}">Contact Us</a></li>
-                                        <li><a href="{% url "faqs" %}">FAQs</a></li>
+                                        <li><a href="{% url "index" %}">Contact Us</a></li>
+                                        <li><a href="{% url "index" %}">FAQs</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -190,10 +190,10 @@
                                                 </ul>
                                             </li>
                                             {% endfor %}
-                                            <li><a href="{% url "about" %}">about</a></li>
-                                            <li><a href="{% url "blogs" %}">Blogs</a></li>
-                                            <li><a href="{% url "contact" %}">Contct US</a></li>
-                                            <li><a href="{% url "brand" %}">Brand</a></li>
+                                            <li><a href="{% url "index" %}">about</a></li>
+                                            <li><a href="{% url "index" %}">Blogs</a></li>
+                                            <li><a href="{% url "index" %}">Contct US</a></li>
+                                            <li><a href="{% url "index" %}">Brand</a></li>
                                             <li><a href="shop.html">Health &amp; Beauty</a></li>
                                         </ul>
                                     </nav>
@@ -257,7 +257,7 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li><a href="{% url "about" %}">About Us</a></li>
+                                    <li><a href="{% url "index" %}">About Us</a></li>
                                     {% for i in main_category %}
                                     <li class="has-mega"><a href="{% url "product" %}">{{i.title}}<i class="far fa-angle-down"></i></a>
                                         <div class="mega-menu">
@@ -291,7 +291,7 @@
                                         </div>
                                     </li>
                                     {% endfor %}
-                                    <li><a href="{% url "blogs" %}">Blog <i class="far fa-angle-down"></i></a>
+                                    <li><a href="{% url "index" %}">Blog <i class="far fa-angle-down"></i></a>
                                         
                                     </li>
                                     <li>
