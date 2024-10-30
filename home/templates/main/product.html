@@ -405,12 +405,12 @@
                                         <div class="product__item product__item-d">
                                             <div class="product__thumb fix">
                                                 <div class="product-image w-img">
-                                                    <a href="product-details.html">
+                                                    <a href="{{rs.get_absolute_url}}">
                                                         <img src="{{rs.image.url}}"  style="height:275px;" alt="product">
                                                     </a>
                                                 </div>
                                                 <div class="product-action">
-                                                    <a href="#" class="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">
+                                                    <a href="#" class="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId--{{forloop.counter}}">
                                                         <i class="fal fa-eye"></i>
                                                         <i class="fal fa-eye"></i>
                                                     </a>
@@ -426,7 +426,7 @@
                                             </div>
                                             <br>
                                             <div class="product__content-3">
-                                                <h6><a href="product-details.html">{{rs.title}}</a></h6>
+                                                <h6><a href="{{rs.get_absolute_url}}">{{rs.title}}</a></h6>
                                                 <div class="rating mb-5">
                                                     <ul>
                                                         <li><a href="#"><i class="fal fa-star"></i></a></li>
@@ -446,15 +446,13 @@
                                                 <button type="button" class="cart-btn d-flex mb-10 align-items-center justify-content-center w-100">
                                                 Add to Cart
                                                 </button>
-                                                <button type="button" class="wc-checkout d-flex align-items-center justify-content-center w-100" data-bs-toggle="modal" data-bs-target="#productModalId">
+                                                <button type="button" class="wc-checkout d-flex align-items-center justify-content-center w-100" data-bs-toggle="modal" data-bs-target="#productModalId--{{forloop.counter}}"">
                                                     Quick View
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
                                     {% endfor %}
-
-
                                 </div>
                             </div>
                         </div>
@@ -469,13 +467,13 @@
                                                     <div class="col-md-4">
                                                         <div class="features-thum">
                                                             <div class="features-product-image w-img">
-                                                                <a href="product-details.html"><img src="{{rs.image.url}}" style="width:225px;" alt=""></a>
+                                                                <a href="product-details.html"><img src="{{rs.image.url}}" style="width:225px; height:250px;" alt=""></a>
                                                             </div>
                                                             <div class="product__offer">
                                                                 <span class="discount">-15%</span>
                                                             </div>
                                                             <div class="product-action">
-                                                                <a href="#" class="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">
+                                                                <a href="#" class="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId--{{forloop.counter}}"">
                                                                     <i class="fal fa-eye"></i>
                                                                     <i class="fal fa-eye"></i>
                                                                 </a>
@@ -576,7 +574,8 @@
     <!-- shop-area-end -->
 
     <!-- shop modal start -->
-    <div class="modal fade" id="productModalId" tabindex="-1" role="dialog" aria-hidden="true">
+    {% for i in product %}
+    <div class="modal fade" id="productModalId--{{forloop.counter}}" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered product__modal" role="document">
             <div class="modal-content">
                 <div class="product__modal-wrapper p-relative">
@@ -588,54 +587,40 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                             <div class="product__modal-box">
                                 <div class="tab-content" id="modalTabContent">
-                                    <div class="tab-pane fade show active" id="nav1" role="tabpanel" aria-labelledby="nav1-tab">
+
+                                    <div class="tab-pane fade show active" id="nav{{image.id}}" role="tabpanel" aria-labelledby="nav{{image.id}}-tab">
                                         <div class="product__modal-img w-img">
-                                            <img src="{% static '' %}assets/img/quick-view/quick-view-1.jpg" alt="">
+                                            <img src="{{i.image.url}}" alt="" style="height:300px;" >
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="nav2" role="tabpanel" aria-labelledby="nav2-tab">
+
+                                    {% for image in i.images_set.all %}
+                                    <div class="tab-pane fade show" id="nav{{image.id}}" role="tabpanel" aria-labelledby="nav{{image.id}}-tab">
                                         <div class="product__modal-img w-img">
-                                            <img src="{% static '' %}assets/img/quick-view/quick-view-2.jpg" alt="">
+                                            <img src="{{image.image.url}}" alt="" style="height:300px;">
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="nav3" role="tabpanel" aria-labelledby="nav3-tab">
-                                        <div class="product__modal-img w-img">
-                                            <img src="{% static '' %}assets/img/quick-view/quick-view-3.jpg" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="nav4" role="tabpanel" aria-labelledby="nav4-tab">
-                                        <div class="product__modal-img w-img">
-                                            <img src="{% static '' %}assets/img/quick-view/quick-view-4.jpg" alt="">
-                                        </div>
-                                    </div>
-                                    </div>
+                                    {% endfor %}
+                                    
+                                </div>
+
+                                <br>
                                 <ul class="nav nav-tabs" id="modalTab" role="tablist">
+    
+                                    {% for image in i.images_set.all %}
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link active" id="nav1-tab" data-bs-toggle="tab" data-bs-target="#nav1" type="button" role="tab" aria-controls="nav1" aria-selected="true">
-                                            <img src="{% static '' %}assets/img/quick-view/quick-nav-1.jpg" alt="">
+                                        <button class="nav-link" id="nav{{image.id}}-tab" data-bs-toggle="tab" data-bs-target="#nav{{image.id}}" type="button" role="tab" aria-controls="nav{{image.id}}" aria-selected="true">
+                                            <img src="{{image.image.url}}" alt="" style="width:85px;height:85px;">
                                         </button>
                                     </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="nav2-tab" data-bs-toggle="tab" data-bs-target="#nav2" type="button" role="tab" aria-controls="nav2" aria-selected="false">
-                                        <img src="{% static '' %}assets/img/quick-view/quick-nav-2.jpg" alt="">
-                                        </button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="nav3-tab" data-bs-toggle="tab" data-bs-target="#nav3" type="button" role="tab" aria-controls="nav3" aria-selected="false">
-                                        <img src="{% static '' %}assets/img/quick-view/quick-nav-3.jpg" alt="">
-                                        </button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="nav4-tab" data-bs-toggle="tab" data-bs-target="#nav4" type="button" role="tab" aria-controls="nav4" aria-selected="false">
-                                        <img src="{% static '' %}assets/img/quick-view/quick-nav-4.jpg" alt="">
-                                        </button>
-                                    </li>
-                                    </ul>
+                                    {% endfor %}
+                                    
+                                </ul>
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                             <div class="product__modal-content">
-                                <h4><a href="product-details.html">Samsung C49J89: £875, Debenhams Plus</a></h4>
+                                <h4><a href="">{{i.title}}</a></h4>
                                 <div class="product__review d-sm-flex">
                                     <div class="rating rating__shop mb-10 mr-30">
                                     <ul>
@@ -701,6 +686,7 @@
             </div>
         </div>
     </div>
+    {% endfor %}
     <!-- shop modal end -->
 
 </main>

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from home.models import *
 from product.models import *
 
@@ -46,6 +46,22 @@ def product(request):
         'product':product,
     }
     return render(request,'main/product.html',context)
+
+
+def product_details(request,slug): 
+
+    product = Product.objects.filter(slug = slug)
+    if product.exists():
+        product = Product.objects.get(slug = slug)
+    else :
+        return redirect('404')
+    context = {
+
+        'product': product,
+    }   
+     
+    return render(request, 'main/product_detail.html',context)
+
 
 def faqs(request):    
     setting = Setting.objects.all().order_by('-id')[0:1]
