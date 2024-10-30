@@ -177,15 +177,11 @@
 
                                             {% for i in category %}
                                             <li>
-                                                <a href="shop.html">{{i.title}} <i class="far fa-angle-down"></i></a>
+                                                <a href="/">{{i.title}} <i class="far fa-angle-down"></i></a>
                                                 <ul class="mega-menu">
-                                                    {% for cat in i.category_set.all %}
-                                                    <li ><a href="shop.html" style="color: orange;" >{{cat.title}}</a>
-                                                        <ul class="mega-item">
-                                                            {% for sub_cat in cat.sub_category_set.all %}
-                                                            <li><a href="product-details.html">{{sub_cat.title}}</a></li>
-                                                            {% endfor %}
-                                                        </ul>
+                                                    {% for cat in i.sub_category_set.all %}
+                                                    <li ><a href="/" style="color: orange;" >{{cat.title}}</a>
+                                                       
                                                     </li>
                                                     {% endfor %}
                                                 </ul>
@@ -212,6 +208,7 @@
                             <nav>
                                 <ul>
                                     
+                                    <li><a href="/">Home</a></li>
                                     <li><a href="{% url "aboutus" %}">About Us</a></li>
                                     <li><a href="{% url "blog" %}">Blogs</a></li>
                                     <li><a href="{% url "brand" %}">Brand</a></li>
@@ -220,7 +217,7 @@
                                         <div class="mega-menu">
                                             <div class="container container-mega">
                                                 <ul>
-                                                    {% for cat in i.category_set.all %}
+                                                    {% for cat in i.sub_category_set.all %}
                                                     <li>
                                                         <ul>
                                                         <li class="title"><a href="shop.html">{{cat.title}}</a></li>

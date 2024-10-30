@@ -467,7 +467,7 @@
                                                     <div class="col-md-4">
                                                         <div class="features-thum">
                                                             <div class="features-product-image w-img">
-                                                                <a href="product-details.html"><img src="{{rs.image.url}}" style="width:225px; height:250px;" alt=""></a>
+                                                                <a href="{{rs.get_absolute_url}}"><img src="{{rs.image.url}}" style="width:225px; height:250px;" alt=""></a>
                                                             </div>
                                                             <div class="product__offer">
                                                                 <span class="discount">-15%</span>
@@ -490,7 +490,7 @@
                                                     </div>
                                                     <div class="col-md-8">
                                                         <div class="product__content product__content-d">
-                                                            <h6><a href="product-details.html">{{rs.title}}</a></h6>
+                                                            <h6><a href="{{rs.get_absolute_url}}">{{rs.title}}</a></h6>
                                                             <div class="rating mb-5">
                                                                 <ul class="rating-d">
                                                                     <li><a href="#"><i class="fal fa-star"></i></a></li>
