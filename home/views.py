@@ -25,6 +25,8 @@ def index(request):
 def aboutus(request):    
     setting = Setting.objects.all().order_by('-id')[0:1]
     slider = Slider.objects.all().order_by('-id')[0:6]
+    category = Category.objects.all().order_by('-id')
+    sub_category = Sub_Category.objects.all().order_by('-id')
     
     
 
@@ -32,23 +34,33 @@ def aboutus(request):
     context={
         'setting':setting,
         'slider':slider,
+        'category':category,
+        'sub_category':sub_category,
     }
-
     return render(request,'main/about.html',context)
 
 def product(request):    
     setting = Setting.objects.all().order_by('-id')[0:1]
     product = Product.objects.all().order_by('?')
+    category = Category.objects.all().order_by('-id')
+    sub_category = Sub_Category.objects.all().order_by('-id')
+    
+    
 
     page="home"
     context={
         'setting':setting,
         'product':product,
+        'category':category,
+        'sub_category':sub_category,
     }
     return render(request,'main/product.html',context)
 
 
 def product_details(request,slug): 
+    setting = Setting.objects.all().order_by('-id')[0:1]
+    category = Category.objects.all().order_by('-id')
+    sub_category = Sub_Category.objects.all().order_by('-id')
 
     product = Product.objects.filter(slug = slug)
     if product.exists():
@@ -58,6 +70,9 @@ def product_details(request,slug):
     context = {
 
         'product': product,
+        'setting': setting,
+        'category':category,
+        'sub_category':sub_category,
     }   
      
     return render(request, 'main/product_detail.html',context)
@@ -65,36 +80,52 @@ def product_details(request,slug):
 
 def faqs(request):    
     setting = Setting.objects.all().order_by('-id')[0:1]
+    category = Category.objects.all().order_by('-id')
+    sub_category = Sub_Category.objects.all().order_by('-id')
 
     page="home"
     context={
         'setting':setting,
+        'category':category,
+        'sub_category':sub_category,
     }
     return render(request,'main/FQA.html',context)
 
 def contactus(request):    
     setting = Setting.objects.all().order_by('-id')[0:1]
+    category = Category.objects.all().order_by('-id')
+    sub_category = Sub_Category.objects.all().order_by('-id')
 
     page="home"
     context={
         'setting':setting,
+        'category':category,
+        'sub_category':sub_category,
     }
     return render(request,'main/contact.html',context)
 
 def BRAND(request):    
     setting = Setting.objects.all().order_by('-id')[0:1]
+    category = Category.objects.all().order_by('-id')
+    sub_category = Sub_Category.objects.all().order_by('-id')
 
     page="home"
     context={
         'setting':setting,
+        'category':category,
+        'sub_category':sub_category,
     }
     return render(request,'main/BRAND.html',context)
 
 def BLOG(request):    
     setting = Setting.objects.all().order_by('-id')[0:1]
+    category = Category.objects.all().order_by('-id')
+    sub_category = Sub_Category.objects.all().order_by('-id')
 
     page="home"
     context={
         'setting':setting,
+        'category':category,
+        'sub_category':sub_category,
     }
     return render(request,'main/BLOG.html',context)

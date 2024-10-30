@@ -6,6 +6,8 @@
 
 
 {% block body %}
+{% load product_tags %}
+
 <main>
     <!-- breadcrumb__area-start -->
     <section class="breadcrumb__area box-plr-75">
@@ -83,7 +85,7 @@
                             <span><a href="#">Add your review</a></span>
                         </div>
                         <div class="price mb-10">
-                            <span>₹ {{product.price}}</span>
+                            <span>₹ {% call_sallprice product.price product.discount %}</span> &nbsp;&nbsp;&nbsp; <del> ₹ {{product.price}} </del>
                         </div>
                         <div class="features-des mb-20 mt-10">
                            <P>{{product.description | safe }}</p>
