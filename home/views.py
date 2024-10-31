@@ -7,6 +7,7 @@ from product.models import *
 def index(request):    
     setting = Setting.objects.all().order_by('-id')[0:1]
     slider = Slider.objects.all().order_by('-id')[0:6]
+    banner = Banner.objects.all().order_by('-id')[0:3]
     category = Category.objects.all().order_by('-id')
     sub_category = Sub_Category.objects.all().order_by('-id')
     
@@ -18,6 +19,7 @@ def index(request):
         'slider':slider,
         'category':category,
         'sub_category':sub_category,
+        'banner':banner,
     }
 
     return render(request,'main/index.html',context)
