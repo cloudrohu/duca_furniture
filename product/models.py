@@ -90,7 +90,7 @@ class Product(models.Model):
         ('False', 'False'),
     )
 
-    category = models.ForeignKey(Sub_Category, on_delete=models.CASCADE) #many to one relation with Brand
+    sub_category = models.ForeignKey(Sub_Category, on_delete=models.CASCADE) #many to one relation with Brand
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE) #many to one relation with Brand
 
     size = models.ForeignKey(Size, blank=True, null=True , on_delete=models.CASCADE) #many to one relation with Brand

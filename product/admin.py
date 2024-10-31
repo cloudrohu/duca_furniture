@@ -36,7 +36,7 @@ class BrandAdmin(admin.ModelAdmin):
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['id','title','image_tag','featured_project', 'Top_Deals_Of_The_Day','Top_Selling_Products','Recommended_For_You', 'slug', 'create_at','update_at',]
-    list_filter = ['category']
+    list_filter = ['sub_category']
     list_editable = ['featured_project', 'Top_Deals_Of_The_Day','Top_Selling_Products','Recommended_For_You']
     inlines = [ProductImageInline,Additional_InformationInline]
 
