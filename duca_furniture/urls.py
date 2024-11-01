@@ -30,6 +30,11 @@ urlpatterns = [
     path(('blog/'), views.BLOG, name='blog'),
     path('404', views.error404, name='404'),
 
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('account/my_account', views.my_account, name='my_account'),
+    path('account/register', views.register, name='register'),
+    path('account/login', views.login, name='login'),
+
 
 
 

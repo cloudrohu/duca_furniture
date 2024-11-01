@@ -1,7 +1,11 @@
 from django.shortcuts import render,redirect
 from home.models import *
 from product.models import *
+from django.contrib import messages
+from django.contrib.auth.models import User
+# Create your views here.
 
+from django.contrib.auth import authenticate,logout,login
 
 # Create your views here.
 def index(request):    
@@ -114,6 +118,60 @@ def faqs(request):
         'sub_category':sub_category,
     }
     return render(request,'main/FQA.html',context)
+
+def my_account(request):     
+    setting = Setting.objects.all().order_by('-id')[0:1]
+    category = Category.objects.all().order_by('-id')
+    sub_category = Sub_Category.objects.all().order_by('-id')
+
+    page="home"
+    context={
+        'setting':setting,
+        'category':category,
+        'sub_category':sub_category,
+    }
+     
+    return render(request, 'account/my_account.html',context)
+
+def register(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        user = User(
+            username = username,
+            email = email,
+        )
+        user.set_password(password)
+        user.save()    
+    return redirect('my_account')
+
+
+def login(request):
+    setting = Setting.objects.all().order_by('-id')[0:1]
+    category = Category.objects.all().order_by('-id')
+    sub_category = Sub_Category.objects.all().order_by('-id')
+
+    page="home"
+    context={
+        'setting':setting,
+        'category':category,
+        'sub_category':sub_category,
+    }
+
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request,username=username,password=password)
+        if user is not None:
+            login(request,user)
+            return redirect('/')
+        else:
+            messages.error(request,"Email Id & Passwors invalid")
+            return redirect('my_account') 
+    return render(request, 'account/my_account.html',context)
 
 def contactus(request):    
     setting = Setting.objects.all().order_by('-id')[0:1]

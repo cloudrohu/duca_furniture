@@ -53,14 +53,14 @@
 
                                 <div class="tab-pane fade show active" id="thumb" role="tabpanel" aria-labelledby="thumb-tab">
                                     <div class="product__details-nav-thumb w-img">
-                                        <img src="{{product.image.url}}" alt=""style="width:550px;height:320px;">
+                                        <img src="{{product.image.url}}" alt=""style="width:500px;height:320px;">
                                     </div>
                                 </div>
                                 
                                 {% for i in product.images_set.all %}
                                 <div class="tab-pane fade show" id="thumb{{i.id}}" role="tabpanel" aria-labelledby="thumb{{i.id}}-tab">
                                     <div class="product__details-nav-thumb w-img">
-                                        <img src="{{i.image.url}}" alt="" style="width:550px;height:320px;">
+                                        <img src="{{i.image.url}}" alt="" style="width:500px;height:320px;">
                                     </div>
                                 </div>
                                 {% endfor %}
