@@ -114,7 +114,7 @@ class Product(models.Model):
     update_at=models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.category.title +'--'+ self.title
+        return self.sub_category.title +'--'+ self.title
 
     class Meta:
         verbose_name_plural='1. Product'
