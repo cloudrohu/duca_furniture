@@ -35,23 +35,30 @@
     <!-- account-area-start -->
     <div class="account-area mt-70 mb-70">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="basic-login mb-50">
-                        <h5>Login</h5>
                         {% if messages %}
-                            {% for message in message %}
+
+                            {% for message in messages %}
                                 {% if message.tags == 'error' %}
 
-                                <div class="alert alert-"> </div>
-                                
-                                
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert"> 
+                                    {{message}}
+
+                                    <button type="button" class="close" data-dismiss="alert" aria-lebel="Close">
+                                        <span aria-hidden="true">&times;</span> 
+                                        
+                                    </button>
+                                </div>
+                                                                
                                 {% endif %}
                             
                             
                             {% endfor %}
                         {% endif %}
-                        <form action="{% url "login" %}" method="post">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="basic-login mb-50">
+                        <h5>Login</h5>
+                        <form action="{% url "handlelogin" %}" method="post">
                             {% csrf_token %}
                             <label for="name">Username or email address  <span>*</span></label>
                             <input id="name" type="text" placeholder="Enter Username" name="username">
@@ -74,7 +81,10 @@
                 <div class="col-lg-6">
                     <div class="basic-login">
                         <h5>Register</h5>
-                        <form action="{% url "register" %}" method="post">
+
+                        
+                        
+                        <form action="{% url "handleregister" %}" method="post">
                             {% csrf_token %}
                             <label for="username">Username or email address  <span>*</span></label>
                             <input id="username" type="text" placeholder="Enter Username" name="username">

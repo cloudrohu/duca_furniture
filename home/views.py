@@ -4,8 +4,10 @@ from product.models import *
 from django.contrib import messages
 from django.contrib.auth.models import User
 # Create your views here.
+from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth import authenticate,logout,login
+from django.contrib.auth.views import LoginView,LogoutView
 
 # Create your views here.
 def index(request):    
@@ -100,10 +102,30 @@ def product_details(request,slug):
      
     return render(request, 'main/product_detail.html',context)
 
+def filter_data(request):
+    sub_category = request.GET.getlist('sub_category[]')
+    brands = request.GET.getlist('brand[]')
+
+    allProducts = Product.objects.all().order_by('-id').distinct()
+    if len(sub_category) > 0:
+        allProducts = allProducts.filter(sub_category__id__in=sub_category).distinct()
+
+    if len(brands) > 0:
+        allProducts = allProducts.filter(Brand__id__in=brands).distinct()
+
+
+    t = render_to_string('ajax/product.html', {'product': allProducts})
+
+    return JsonResponse({'data': t})
 
 def error404(request):     
      
     return render(request, 'main/404.html')
+
+
+def logout_user(request):     
+    logout (request)
+    return redirect('/')
 
 
 def faqs(request):    
@@ -133,11 +155,19 @@ def my_account(request):
      
     return render(request, 'account/my_account.html',context)
 
-def register(request):
+def register(request):   
     if request.method == 'POST':
         username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password')
+
+        if User.objects.filter(username = username).exists():
+            messages.error(request,'Username is already exists')
+            return redirect('login')
+        
+        if User.objects.filter(email= email).exists():
+            messages.error(request,'email id alredy exists')
+            return redirect('login')
 
         user = User(
             username = username,
@@ -145,21 +175,10 @@ def register(request):
         )
         user.set_password(password)
         user.save()    
-    return redirect('my_account')
+    return redirect('login',)
 
 
-def login(request):
-    setting = Setting.objects.all().order_by('-id')[0:1]
-    category = Category.objects.all().order_by('-id')
-    sub_category = Sub_Category.objects.all().order_by('-id')
-
-    page="home"
-    context={
-        'setting':setting,
-        'category':category,
-        'sub_category':sub_category,
-    }
-
+def LOGIN(request):    
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -170,8 +189,38 @@ def login(request):
             return redirect('/')
         else:
             messages.error(request,"Email Id & Passwors invalid")
-            return redirect('my_account') 
-    return render(request, 'account/my_account.html',context)
+            return redirect('login',) 
+
+
+
+@login_required(login_url='/accounts/login/')
+def PROFILE(request):     
+     
+    return render(request, 'account/profile.html')
+
+
+
+@login_required(login_url='/accounts/login/')
+def PROFILE_UPDATE(request):    
+    if request.method == "POST":
+        username = request.POST.get('username')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        user_id = request.user.id
+
+        user = User.objects.get(id=user_id)
+        user.first_name = first_name
+        user.last_name = last_name
+        user.username = username
+        user.email =email
+    
+        if password != None and password != "":
+            user.set_password(password)
+        user.save()
+     
+    return redirect('profile')
 
 def contactus(request):    
     setting = Setting.objects.all().order_by('-id')[0:1]

@@ -6,6 +6,31 @@
 
 {% block body %}
 
+{% block script %}{% endblock script %}
+<script>
+    $(document).ready(function(){
+        $(".filter-checkbox").on('click', function(){
+            var filter_object={};
+            $(".filter-checkbox").each(function(index,ele){
+                var filter_value=$(this).val();
+                var filter_key=$(this).data('filter');
+                console.log(filter_key,filter_value);
+                filter_object[filter_key]=Array.from(document.querySelectorAll('input[data-filter='+filter_key+']:checked')).map(function(el){
+                     return el.value;
+                });
+            });
+            $.ajax({
+                url:'{% url 'filter-data' %}',
+                data:filter_object,
+                dataType:'json',			
+                success:function(res){				
+                    $("#filteredProducts").html(res.data);				
+                }
+            });
+        });
+    });
+    </script>
+
 {% load product_tags %}
 
 <main>
@@ -37,57 +62,16 @@
                         <h5 class="pt-title">Product categories</h5>
                         <div class="widget-category-list mt-20">
                             <form action="#">
+                                {% for i in sub_category %}
                                 <div class="single-widget-category">
-                                    <input type="checkbox" id="cat-item-1" name="cat-item">
-                                    <label for="cat-item-1">Clothing &amp; Apparel <span>(12)</span></label>
+                                    <input type="checkbox" data-filter="sub_category" id="{{i.id}}" value="{{i.id}}" class="filter-checkbox">
+                                    <label for="{{i.id}}">{{i.title}} <span>({{i.product_set.all.count}})</span></label>
                                 </div>
-                                <div class="single-widget-category">
-                                    <input type="checkbox" id="cat-item-2" name="cat-item">
-                                    <label for="cat-item-2">Consumer Electrics <span>(60)</span></label>
-                                </div>
-                                <div class="single-widget-category">
-                                    <input type="checkbox" id="cat-item-3" name="cat-item">
-                                    <label for="cat-item-3">Computers &amp; Technologies <span>(41)</span></label>
-                                </div>
-                                <div class="single-widget-category">
-                                    <input type="checkbox" id="cat-item-4" name="cat-item">
-                                    <label for="cat-item-4">Phones &amp; Accessories <span>(28)</span></label>
-                                </div>
-                                <div class="single-widget-category">
-                                    <input type="checkbox" id="cat-item-5" name="cat-item">
-                                    <label for="cat-item-5">Babies &amp; Moms <span>(21)</span></label>
-                                </div>
-                                <div class="single-widget-category">
-                                    <input type="checkbox" id="cat-item-7" name="cat-item">
-                                    <label for="cat-item-7">Books &amp; Office <span>(62)</span></label>
-                                </div>
-                                <div class="single-widget-category">
-                                    <input type="checkbox" id="cat-item-8" name="cat-item">
-                                    <label for="cat-item-8">Sport &amp; Outdoo <span>(22)</span></label>
-                                </div>
-                                <div class="single-widget-category">
-                                    <input type="checkbox" id="cat-item-9" name="cat-item">
-                                    <label for="cat-item-9">Chairs &amp; Stools <span>(20)</span></label>
-                                </div>
-                                <div class="single-widget-category">
-                                    <input type="checkbox" id="cat-item-10" name="cat-item">
-                                    <label for="cat-item-10">Furniture &amp; Acessories <span>(06)</span></label>
-                                </div>
-                                <div class="single-widget-category">
-                                    <input type="checkbox" id="cat-item-11" name="cat-item">
-                                    <label for="cat-item-11">Kitchen &amp; Tableware <span>(30)</span></label>
-                                </div>
-                                <div class="single-widget-category">
-                                    <input type="checkbox" id="cat-item-12" name="cat-item">
-                                    <label for="cat-item-12">Lighting <span>(30)</span></label>
-                                </div>
-                                <div class="single-widget-category">
-                                    <input type="checkbox" id="cat-item-13" name="cat-item">
-                                    <label for="cat-item-13">Armchairs &amp; Chaises <span>(30)</span></label>
-                                </div>
+                                {% endfor %}                               
                             </form>
                         </div>
                     </div>
+
                     <div class="product-widget mb-30">
                         <h5 class="pt-title">Filter By Price</h5>
                         <div class="price__slider mt-30">
@@ -100,6 +84,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="product-widget mb-30">
                         <h5 class="pt-title">Choose Color</h5>
                         <div class="product__color mt-20">
@@ -398,7 +383,7 @@
                     <div class="tab-content" id="productGridTabContent">
                         <div class="tab-pane fade  show active" id="FourCol" role="tabpanel" aria-labelledby="FourCol-tab">
                             <div class="tp-wrapper">
-                                <div class="row g-0">
+                                <div class="row g-0" id="filteredProducts">
 
                                     {% for rs in product %}
                                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">

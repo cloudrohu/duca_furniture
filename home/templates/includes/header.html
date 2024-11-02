@@ -10,15 +10,27 @@
                         <div class="col-xl-6 col-lg-7">
                             <div class="header-inner-start">
                                 <div class="header__currency border-right">
+                                    
                                     <div class="s-name">
-                                        <span>Language: </span>
+                                        <br>
+                                        {% if user.is_authenticated %}
+                                        <p class="text-white bg-dark"> 
+                                            {% if user.first_name == "" %}
+                                            {{user.email}}
+
+                                            {% else %}
+
+                                            {{user.first_name}} {{user.last_name}}
+                                            
+                                            {% endif %}
+                                        </p>
+                                        {% else %}
+                                        <p class="text-white bg-dark">                                            
+                                            Please do Login First
+                                        </p>
+                                        {% endif %}
                                     </div>
-                                    <select>
-                                        <option>English</option>
-                                        <option>Deutsch</option>
-                                        <option>Français</option>
-                                        <option>Espanol</option>
-                                    </select>
+                                    
                                 </div>
                                 <div class="header__lang border-right">
                                     <div class="s-name">
@@ -89,14 +101,34 @@
                         </div>
                         <div class="col-xl-4 col-lg-5 col-md-8 col-sm-8">
                             <div class="header-action">
+                                {% if user.is_authenticated %}
+
                                 <div class="block-userlink">
-                                    <a class="icon-link" href="{% url "my_account" %}">
+                                    <a class="icon-link" href="{% url "logout" %}">
+                                    <i class="flaticon-user"></i>
+                                    <span class="text">
+                                    <span class="sub">Logout </span>
+                                    </a>
+                                    
+                                    <a class="icon-link" href="{% url "profile_update" %}">
+                                    <span class="text">
+                                    <span class="sub">Update Profile </span>
+                                    </a>
+                                </div>
+                                
+                                <div class="block-userlink">
+                                    
+                                </div>
+                                {% else %}
+                                <div class="block-userlink">
+                                    <a class="icon-link" href="{% url "login" %}">
                                     <i class="flaticon-user"></i>
                                     <span class="text">
                                     <span class="sub">Login </span>
                                     My Account </span>
                                     </a>
                                 </div>
+                                {% endif %}
                                 <div class="block-wishlist action">
                                     <a class="icon-link" href="wishlist.html">
                                     <i class="flaticon-heart"></i>

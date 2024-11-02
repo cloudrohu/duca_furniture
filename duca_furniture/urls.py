@@ -4,13 +4,17 @@ from django.conf import settings
 from django.conf.urls.static import static
 import home
 from home import views 
+from django.contrib.auth.views import LoginView,LogoutView
+
 from django.utils.translation import gettext_lazy as _
 
 from django.views.generic import RedirectView
+
+
+
 urlpatterns = [
     path('', include('home.urls')),
     path('home/', include('home.urls')),
-    path('logout/',RedirectView.as_view(url = '/admin/logout/')),
 
 
 
@@ -23,6 +27,7 @@ urlpatterns = [
 
     path(('product/'), views.product, name='product'),
     path('product_details/<slug:slug>', views.product_details, name='product_details'),
+    path('product/filter-data',views.filter_data,name="filter-data"),
     
     path(('brand/'), views.BRAND, name='brand'),
     path(('category-list/'), views.category_list, name='category-list'),
@@ -31,9 +36,14 @@ urlpatterns = [
     path('404', views.error404, name='404'),
 
     path('accounts/', include('django.contrib.auth.urls')),
+    
     path('account/my_account', views.my_account, name='my_account'),
-    path('account/register', views.register, name='register'),
-    path('account/login', views.login, name='login'),
+    path('accounts/register', views.register, name='handleregister'),
+    path('accounts/login', views.LOGIN, name='handlelogin'),
+    path('account/profile', views.PROFILE, name='profile'),
+    path('account/profile/update', views.PROFILE_UPDATE, name='profile_update'),
+    path('logout/', views.logout_user, name='logout'),
+
 
 
 

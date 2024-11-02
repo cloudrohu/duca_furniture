@@ -32,7 +32,7 @@ ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     'adminlte3',
-    'adminlte3_theme',
+    'adminlte3_theme',    
     
     'django.contrib.admin',
     'django.contrib.auth',
@@ -161,3 +161,19 @@ CKEDITOR_CONFIGS = {
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'login'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'dncontroller.com@gmail.com'
+EMAIL_HOST_PASSWORD = 'ikfmvqlokbagepog'
+
+
+KEY_ID = "rzp_test_plN5whnJZG6OuN"
+
+KEY_SECRET = "MhlVK1AgALjOG09yO3w9kE9E"
