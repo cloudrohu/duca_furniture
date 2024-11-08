@@ -6,7 +6,7 @@
 
 {% block body %}
 
-{% block script %}{% endblock script %}
+{% block script %}
 <script>
     $(document).ready(function(){
         $(".filter-checkbox").on('click', function(){
@@ -30,7 +30,7 @@
         });
     });
     </script>
-
+    {% endblock script %}
 {% load product_tags %}
 
 <main>
@@ -60,6 +60,8 @@
                 <div class="col-xl-3 col-lg-4">
                     <div class="product-widget mb-30">
                         <h5 class="pt-title">Product categories</h5>
+
+
                         <div class="widget-category-list mt-20">
                             <form action="#">
                                 {% for i in sub_category %}

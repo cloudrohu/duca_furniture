@@ -7,6 +7,9 @@
 
 {% block body %}
 <main>
+    {% load product_tags %}
+
+
     <!-- features__area-start -->
     <section class="features__area pt-20">
         <div class="container">
@@ -59,7 +62,8 @@
         </div>
     </section>
     <!-- features__area-end -->
-
+     
+    
     <!-- banner__area-start -->
     <section class="banner__area pt-20 pb-10">
         <div class="container">
@@ -70,10 +74,7 @@
                         <div class="banner__img">
                             <a href="product-details.html"><img src="{{i.image.url}}" alt="" style="height: 175px;"></a>
                         </div>
-                        <div class="banner__content">
-                            <h6><a href="product-details.html">Intelligent <br> New Touch Control</a></h6>
-                            <p>Discount  20% On Products</p>
-                        </div>
+                        
                     </div>
                 </div>
                 {% endfor %}
@@ -116,7 +117,7 @@
                             <div class="product__item swiper-slide">
                                 <div class="product__thumb fix">
                                     <div class="product-image w-img">
-                                        <a href="product-details.html">
+                                        <a href="#">
                                             <img src="{{rs.image.url}}" style="height: 250px;" alt="product">
                                         </a>
                                     </div>
@@ -124,7 +125,7 @@
                                     
                                 </div>
                                 <div class="product__content">
-                                    <h6><a href="product-details.html">{{rs.title | truncatewords:10}}</a></h6>
+                                    <h6><a href="#">{{rs.title | truncatewords:10}}</a></h6>
                                     
                                 </div>
                                 <div class="product__add-cart text-center">
@@ -149,7 +150,7 @@
         <div class="container">
             <div class="row">
 
-                {% for i in banner %}
+                {% for i in banner2 %}
                 <div class="col-xl-6 col-lg-6 col-md-12">
                     <div class="banner__item p-relative w-img mb-30">
                         <div class="banner__img">
@@ -188,13 +189,14 @@
                 <div class="col-xl-6 col-lg-12">
                     <div class="single-features-item single-features-item-d b-radius mb-20">
                         <div class="row  g-0 align-items-center">
+                            {% for rs in featured_project_1 %}
                             <div class="col-md-6">
                                 <div class="features-thum">
                                     <div class="features-product-image w-img">
-                                        <a href="product-details.html"><img src="{% static '' %}assets/img/features-product/fpb-1.jpg" alt=""></a>
+                                        <a href="#"><img src="{{rs.image.url}}" style="height: 325px; width:290px;" alt=""></a>
                                     </div>
                                     <div class="product__offer">
-                                        <span class="discount">-15%</span>
+                                        <span class="discount">-{{rs.discount}}%</span>
                                     </div>
                                     <div class="product-action">
                                         <a href="#" class="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">
@@ -212,9 +214,10 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-md-6">
                                 <div class="product__content product__content-d">
-                                    <h6><a href="product-details.html">Samsang Galaxy A70 128GB Dual-SIM</a></h6>
+                                    <h6><a href="#">{{rs.title}}</a></h6>
                                     <div class="rating mb-5">
                                         <ul class="rating-d">
                                             <li><a href="#"><i class="fal fa-star"></i></a></li>
@@ -226,15 +229,10 @@
                                         <span>(01 review)</span>
                                     </div>
                                     <div class="price d-price mb-10">
-                                        <span> ₹307.00 <del> ₹110</del></span>
+                                        <span>₹ {% call_sallprice rs.price rs.discount %}</span> &nbsp;&nbsp;&nbsp; <del> ₹ {{rs.price}} </del>
                                     </div>
                                     <div class="features-des mb-25">
-                                        <ul>
-                                            <li><a href="product-details.html"><i class="fas fa-circle"></i> Bass and Stereo Sound.</a></li>
-                                            <li><a href="product-details.html"><i class="fas fa-circle"></i> Display with 3088 x 1440 pixels resolution.</a></li>
-                                            <li><a href="product-details.html"><i class="fas fa-circle"></i> Memory, Storage &amp; SIM: 12GB RAM, 256GB.</a></li>
-                                            <li><a href="product-details.html"><i class="fas fa-circle"></i> Androi v10.0 Operating system.</a></li>
-                                        </ul>
+                                        <p>{{rs.description }}</p>
                                     </div>
                                     <div class="cart-option">
                                         <a href="cart.html" class="cart-btn-2 w-100 mr-10">Add to Cart</a>
@@ -242,27 +240,32 @@
                                     </div>
                                 </div>
                             </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
+
                 <div class="col-xl-6 col-lg-12">
+
                     <div class="row">
+                        {% for rs in featured_project_4 %}
+
                         <div class="col-md-6">
                             <div class="single-features-item b-radius mb-20">
                                 <div class="row  g-0 align-items-center">
                                     <div class="col-6">
                                         <div class="features-thum">
                                             <div class="features-product-image w-img">
-                                                <a href="product-details.html"><img src="{% static '' %}assets/img/features-product/fp-1.jpg" alt=""></a>
+                                                <a href="product-details.html"><img src="{{rs.image.url}}" style="height: 150px; width:135px;"  alt=""></a>
                                             </div>
                                             <div class="product__offer">
-                                                <span class="discount">-15%</span>
+                                                <span class="discount">-{{rs.discount}}%</span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="product__content product__content-d">
-                                            <h6><a href="product-details.html">Epple Watch SE Gold Aluminum</a></h6>
+                                            <h6><a href="product-details.html">{{rs.title}}</a></h6>
                                             <div class="rating mb-5">
                                                 <ul>
                                                     <li><a href="#"><i class="fal fa-star"></i></a></li>
@@ -274,115 +277,18 @@
                                                 <span>(01 review)</span>
                                             </div>
                                             <div class="price d-price">
-                                                <span> ₹307.00 <del> ₹110</del></span>
+                                                <span>₹ {% call_sallprice rs.price rs.discount %}</span> &nbsp;&nbsp;&nbsp; <del> ₹ {{rs.price}} </del>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="single-features-item b-radius mb-20">
-                                <div class="row  g-0 align-items-center">
-                                    <div class="col-6">
-                                        <div class="features-thum">
-                                            <div class="features-product-image w-img">
-                                                <a href="product-details.html"><img src="{% static '' %}assets/img/features-product/fp-2.jpg" alt=""></a>
-                                            </div>
-                                            <div class="product__offer">
-                                                <span class="discount">-5%</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="product__content product__content-d">
-                                            <h6><a href="product-details.html">G951s Pink Stereo Gaming Headset</a></h6>
-                                            <div class="rating mb-5">
-                                                <ul>
-                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
-                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
-                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
-                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
-                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
-                                                </ul>
-                                                <span>(01 review)</span>
-                                            </div>
-                                            <div class="price d-price">
-                                                <span> ₹307.00 <del> ₹110</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {% endfor %}
+                        
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="single-features-item b-radius mb-20">
-                                <div class="row  g-0 align-items-center">
-                                    <div class="col-6">
-                                        <div class="features-thum">
-                                            <div class="features-product-image w-img">
-                                                <a href="product-details.html"><img src="{% static '' %}assets/img/features-product/fp-3.jpg" alt=""></a>
-                                            </div>
-                                            <div class="product__offer">
-                                                <span class="discount">-25%</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="product__content product__content-d">
-                                            <h6><a href="product-details.html">Solo3 Wireless On-Ear Headphones</a></h6>
-                                            <div class="rating mb-5">
-                                                <ul>
-                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
-                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
-                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
-                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
-                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
-                                                </ul>
-                                                <span>(01 review)</span>
-                                            </div>
-                                            <div class="price d-price">
-                                                <span> ₹307.00 <del> ₹110</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="single-features-item b-radius mb-20">
-                                <div class="row  g-0 align-items-center">
-                                    <div class="col-6">
-                                        <div class="features-thum">
-                                            <div class="features-product-image w-img">
-                                                <a href="product-details.html"><img src="{% static '' %}assets/img/features-product/fp-4.jpg" alt=""></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="product__content product__content-d">
-                                            <h6><a href="product-details.html">Men’s Short-Sleeve Pocket Oxford Shirt</a></h6>
-                                            <div class="rating mb-5">
-                                                <ul>
-                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
-                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
-                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
-                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
-                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
-                                                </ul>
-                                                <span>(01 review)</span>
-                                            </div>
-                                            <div class="price d-price">
-                                                <span> ₹307.00 <del> ₹110</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+
                 </div>
             </div>
         </div>
@@ -454,7 +360,22 @@
         </div>
     </section>
     <!-- banner__area-end -->
-
+    <!-- moveing-text-area-start -->
+    <section class="moveing-text-area">
+        <div class="container">
+            <div class="ovic-running">
+                <div class="wrap">
+                    <div class="inner">
+                        <p class="item">Free UK Delivery - Return Over $100.00 ( Excluding Homeware )   |   Free UK Collect From Store</p>
+                        <p class="item">Design Week / 15% Off the website / Code: AYOSALE-2020</p>
+                        <p class="item">Always iconic. Now organic. Introducing the $20 Organic Tee.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- moveing-text-area-end -->
+     <br>
     <!-- recomand-product-area-start -->
     <section class="recomand-product-area">
         <div class="container">
@@ -478,7 +399,7 @@
                             <div class="product__item mb-20 swiper-slide">
                                 <div class="product__thumb fix">
                                     <div class="product-image w-img">
-                                        <a href="product-details.html">
+                                        <a href="{{i.get_absolute_url}}">
                                             <img src="{{i.image.url}}" style="height: 250px;" alt="product">
                                         </a>
                                     </div>
@@ -500,8 +421,9 @@
                                         </a>
                                     </div>
                                 </div>
+                                <br>
                                 <div class="product__content">
-                                    <h6><a href="product-details.html">{{i.title }}</a></h6>
+                                    <h6><a href="{{i.get_absolute_url}}">{{i.title }}</a></h6>
                                     <div class="rating mb-5">
                                         <ul>
                                             <li><a href="#"><i class="fal fa-star"></i></a></li>

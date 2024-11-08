@@ -15,7 +15,15 @@ def index(request):
     slider = Slider.objects.all().order_by('-id')[0:6]
     banner = Banner.objects.all().order_by('-id')[0:3]
     category = Category.objects.all().order_by('-id')
+    main_category = Category.objects.all().order_by('-id')[0:4]
     sub_category = Sub_Category.objects.all().order_by('-id')
+    Recommended = Product.objects.filter(Recommended_For_You= 'True').order_by('-id')
+    Top_Deals_Of_The_Day = Product.objects.filter(Top_Deals_Of_The_Day= 'True').order_by('-id')
+    featured_project_1 = Product.objects.filter(featured_project= 'True').order_by('-id')[0:1]
+    featured_project_4 = Product.objects.filter(featured_project= 'True').order_by('-id')[2:6]
+    banner2 = Banner.objects.filter(featured_project= 'True').order_by('-id')[3:5]
+    offer = Offer.objects.filter(featured_project= 'True').order_by('-id')[:6]
+    brand = Brand.objects.filter(featured_brand= 'True').order_by('-id')[:6]
     
     
 
@@ -25,7 +33,15 @@ def index(request):
         'slider':slider,
         'category':category,
         'sub_category':sub_category,
+        'Recommended':Recommended,
+        'Top_Deals_Of_The_Day':Top_Deals_Of_The_Day,
+        'featured_project_1':featured_project_1,
+        'featured_project_4':featured_project_4,
         'banner':banner,
+        'offer':offer,
+        'brand':brand,
+        'banner2':banner2,
+        'main_category':main_category,
     }
 
     return render(request,'main/index.html',context)
@@ -103,12 +119,12 @@ def product_details(request,slug):
     return render(request, 'main/product_detail.html',context)
 
 def filter_data(request):
-    sub_category = request.GET.getlist('sub_category[]')
+    sub_categories = request.GET.getlist('sub_category[]')
     brands = request.GET.getlist('brand[]')
 
     allProducts = Product.objects.all().order_by('-id').distinct()
-    if len(sub_category) > 0:
-        allProducts = allProducts.filter(sub_category__id__in=sub_category).distinct()
+    if len(sub_categories) > 0:
+        allProducts = allProducts.filter(Sub_Categories__id__in=sub_categories).distinct()
 
     if len(brands) > 0:
         allProducts = allProducts.filter(Brand__id__in=brands).distinct()
