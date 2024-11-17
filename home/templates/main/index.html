@@ -72,7 +72,7 @@
                 <div class="col-xl-4 col-lg-4 col-md-6">
                     <div class="banner__item p-relative w-img mb-30">
                         <div class="banner__img">
-                            <a href="product-details.html"><img src="{{i.image.url}}" alt="" style="height: 175px;"></a>
+                            <a href="#"><img src="{{i.image.url}}" alt="" style="height: 175px;"></a>
                         </div>
                         
                     </div>
@@ -180,7 +180,7 @@
                             <h5 class="st-titile">Top Featured Products</h5>
                         </div>
                         <div class="button-wrap">
-                            <a href="shop.html">See All Product <i class="fal fa-chevron-right"></i></a>
+                            <a href="#">See All Product <i class="fal fa-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -193,7 +193,7 @@
                             <div class="col-md-6">
                                 <div class="features-thum">
                                     <div class="features-product-image w-img">
-                                        <a href="#"><img src="{{rs.image.url}}" style="height: 325px; width:290px;" alt=""></a>
+                                        <a href="{{rs.get_absolute_url}}"><img src="{{rs.image.url}}" style="height: 325px; width:290px;" alt=""></a>
                                     </div>
                                     <div class="product__offer">
                                         <span class="discount">-{{rs.discount}}%</span>
@@ -217,7 +217,7 @@
 
                             <div class="col-md-6">
                                 <div class="product__content product__content-d">
-                                    <h6><a href="#">{{rs.title}}</a></h6>
+                                    <h6><a href="{{rs.get_absolute_url}}">{{rs.title}}</a></h6>
                                     <div class="rating mb-5">
                                         <ul class="rating-d">
                                             <li><a href="#"><i class="fal fa-star"></i></a></li>
@@ -235,8 +235,8 @@
                                         <p>{{rs.description }}</p>
                                     </div>
                                     <div class="cart-option">
-                                        <a href="cart.html" class="cart-btn-2 w-100 mr-10">Add to Cart</a>
-                                        <a href="cart.html" class="transperant-btn"><i class="fal fa-heart"></i></a>
+                                        <a href="#" class="cart-btn-2 w-100 mr-10">Add to Cart</a>
+                                        <a href="#" class="transperant-btn"><i class="fal fa-heart"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -256,7 +256,7 @@
                                     <div class="col-6">
                                         <div class="features-thum">
                                             <div class="features-product-image w-img">
-                                                <a href="product-details.html"><img src="{{rs.image.url}}" style="height: 150px; width:135px;"  alt=""></a>
+                                                <a href="{{rs.get_absolute_url}}"><img src="{{rs.image.url}}" style="height: 150px; width:135px;"  alt=""></a>
                                             </div>
                                             <div class="product__offer">
                                                 <span class="discount">-{{rs.discount}}%</span>
@@ -265,7 +265,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="product__content product__content-d">
-                                            <h6><a href="product-details.html">{{rs.title}}</a></h6>
+                                            <h6><a href="{{rs.get_absolute_url}}">{{rs.title}}</a></h6>
                                             <div class="rating mb-5">
                                                 <ul>
                                                     <li><a href="#"><i class="fal fa-star"></i></a></li>

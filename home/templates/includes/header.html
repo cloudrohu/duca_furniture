@@ -50,7 +50,6 @@
                                 <div class="ovic-menu-wrapper">
                                     <ul>
                                         <li><a href="{% url "aboutus" %}">About Us</a></li>
-                                        <li><a href="{% url "brand" %}">Brand</a></li>
                                         <li><a href="/">Order Tracking</a></li>
                                         <li><a href="{% url "contactus" %}">Contact Us</a></li>
                                         <li><a href="{% url "faqs" %}">FAQs</a></li>
@@ -223,7 +222,6 @@
                                             <li><a href="{% url "aboutus" %}">about</a></li>
                                             <li><a href="{% url "blog" %}">Blogs</a></li>
                                             <li><a href="{% url "contactus" %}">Contct US</a></li>
-                                            <li><a href="{% url "brand" %}">Brand</a></li>
                                             <li><a href="{% url "faqs" %}">FAQs</a></li>
                                         </ul>
                                     </nav>
@@ -243,7 +241,6 @@
                                     <li><a href="/">Home</a></li>
                                     <li><a href="{% url "aboutus" %}">About Us</a></li>
                                     <li><a href="{% url "blog" %}">Blogs</a></li>
-                                    <li><a href="{% url "brand" %}">Brand</a></li>
                                     {% for i in Maincategory %}
                                     <li class="has-mega"><a href="{% url "product" %}">{{i.title}}<i class="far fa-angle-down"></i></a>
                                         <div class="mega-menu">
@@ -289,7 +286,7 @@
                     </div>
                     <div class="col-lg-3 col-md-6 col-9">
                         <div class="shopeing-text text-sm-end">
-                            <p>Spend ₹120 more and get free shipping!</p>
+                            <p>free shipping!</p>
                         </div>
                     </div>
                 </div>

@@ -85,6 +85,8 @@ def product(request):
     product = Product.objects.all().order_by('?')
     category = Category.objects.all().order_by('-id')
     sub_category = Sub_Category.objects.all().order_by('-id')
+    Top_Deals_Of_The_Day = Product.objects.filter(Top_Deals_Of_The_Day= 'True').order_by('-id')[0:10]
+
     
     
 
@@ -94,6 +96,7 @@ def product(request):
         'product':product,
         'category':category,
         'sub_category':sub_category,
+        'Top_Deals_Of_The_Day':Top_Deals_Of_The_Day,
     }
     return render(request,'main/product.html',context)
 
@@ -147,6 +150,7 @@ def logout_user(request):
 def faqs(request):    
     setting = Setting.objects.all().order_by('-id')[0:1]
     category = Category.objects.all().order_by('-id')
+    sub_category = Sub_Category.objects.all().order_by('-id')
     sub_category = Sub_Category.objects.all().order_by('-id')
 
     page="home"
